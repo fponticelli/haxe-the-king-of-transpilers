@@ -6,6 +6,7 @@ var express    = require('express'),
     livereload = require('express-livereload'),
     fs         = require('fs'),
     app        = express(),
+    port       = 3000,
     cwd        = __dirname;
 
 function compile(str, path) {
@@ -41,4 +42,5 @@ livereload(app, {
   watchDir: cwd
 });
 
-app.listen(3000);
+app.listen(port);
+console.log("listening on port: " + port);
