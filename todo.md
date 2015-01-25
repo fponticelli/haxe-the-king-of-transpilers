@@ -1,8 +1,4 @@
-haxe intro
-    haxe toolkit (compiler + language + std lib + native livs)
-    targets
-    maturity
-type system
+# type system
 
 # The compiler understands your code
 
