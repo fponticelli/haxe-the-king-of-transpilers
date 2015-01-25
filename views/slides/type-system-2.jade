@@ -1,0 +1,17 @@
+h2 Type System #2
+
+pre.sh_haxe(data-jmpress="fade after step").
+  public function addPerson(options : {
+    name : String,
+    company : String,
+    ?age : Int
+  }) { /* do something here */}
+
+br
+
+pre.sh_haxe(data-jmpress="fade after sh_haxe").
+  company.addPerson({
+    name : "Franco", // string/not optional
+    company : "Pellucid", // same
+    age : null, // integer/optional
+  });
