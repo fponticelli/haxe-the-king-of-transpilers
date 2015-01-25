@@ -1,5 +1,5 @@
 $(function() {
-	sh_highlightDocument();
+	sh_highlightDocument('js/lang/', '.js');
 
 	$('img[data-src]').each(function() {
 		$(this).attr('src', "images/blank.gif");

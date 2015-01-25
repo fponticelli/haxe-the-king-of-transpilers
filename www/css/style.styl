@@ -40,6 +40,43 @@ body
 .step.active, .step.nested-active
   opacity 1
 
+pre
+  margin 1em auto
+  max-width 70%
+  box-shadow 2px 2px 4px rgba(0,0,0,0.2)
+
+  &.sh_haxe
+  &.sh_java
+  &.sh_javascript
+    margin-top 2em
+
+  &.sh_haxe:before
+  &.sh_java:before
+  &.sh_javascript:before
+    display block
+    position absolute
+    margin-top -2.7em
+    color #888
+    font-size 0.65em
+    width 734px
+    text-align right
+    left 0
+    font-weight bold
+
+  &.sh_haxe:before
+    content "Haxe"
+  &.sh_java:before
+    content "Java"
+  &.sh_javascript:before
+    content "JavaScript"
+
+  &.sh_haxe + .sh_haxe:before
+    display none
+
+  &.sh_haxe + .sh_haxe
+    margin-top -1em
+    border-top none
+
 @import 'typography'
 @import 'layout'
 @import 'effects'
