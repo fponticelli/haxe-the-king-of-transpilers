@@ -1,1 +1,16 @@
-h2 Pattern Matching
+h3 Pattern Matching - Variable Capture
+
+pre.
+  var myTree = Node(
+        Leaf("foo"),
+        Node(
+          Leaf("bar"),
+          Leaf("foobar")
+        )
+      );
+
+  return switch myTree {
+    case Leaf(s): s;
+    case Node(Leaf(s), _): s;
+    case _: "none";
+  };

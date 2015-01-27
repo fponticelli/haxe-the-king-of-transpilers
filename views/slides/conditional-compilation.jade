@@ -1,1 +1,10 @@
 h2 Conditional Compilation
+
+pre(data-jmpress="fade after step").
+  #if cpp
+    nativeCall();
+  #elseif js
+    untyped __js__("window.someApiCall")(arg);
+  #else
+    // do nothing
+  #end

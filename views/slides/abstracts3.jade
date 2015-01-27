@@ -1,0 +1,12 @@
+h2 Abstracts #3
+
+pre.
+  var rgb;
+  var rgb1 = Std.parseInt("0x001133");
+  rgb = rgb1;
+  console.log(rgb >> 8 & 255);
+  console.log("Nice color " +
+    ("#" + StringTools.hex(rgb >> 16 & 255) +
+    StringTools.hex(rgb >> 8 & 255) +
+    StringTools.hex(rgb & 255)) +
+    "!");

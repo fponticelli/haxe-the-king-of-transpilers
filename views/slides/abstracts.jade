@@ -1,1 +1,29 @@
 h2 Abstracts
+
+pre.
+  using StringTools;
+
+  abstract RGB(Int) from Int to Int {
+    inline public function new(rgb : Int)
+      this = rgb;
+
+    public var red(get, never)   : Int;
+    public var green(get, never) : Int;
+    public var blue(get, never)  : Int;
+
+    inline function get_red()
+      return (this >> 16) & 0xFF;
+    inline function get_green()
+      return (this >> 8) & 0xFF;
+    inline function get_blue()
+      return this & 0xFF;
+
+    @:from
+    static inline public function fromString(s : String)
+      // some additional pre-processing
+      // might be needed here
+      return new RGB(Std.parseInt(s));
+    @:to
+    inline public function toString()
+      return '#${red.hex()}${green.hex()}${blue.hex()}';
+  }

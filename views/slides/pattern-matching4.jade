@@ -1,0 +1,13 @@
+h3 Pattern Matching - Match on Multiple Values and Guards
+
+pre.
+  var num = 3,
+      flag = false,
+      text = "foo";
+
+  return switch [num, flag, text] {
+    case [num, true, _] if(num >= 0): "non-negative";
+    case [_, _, "foo"],
+         [_, _, "bar"]: "foo or bar";
+    case [_, _, _]: "everything else";
+  };

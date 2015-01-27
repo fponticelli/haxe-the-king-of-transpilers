@@ -26,4 +26,109 @@ for(var i = 0; i < 5; i++) {
 
 // usage
 trace(instance.getNameLength());
-</pre><br><pre data-jmpress="fade after .sh_haxe" class="sh_haxe">console.log(instance.name.length);</pre></div><div id="dce" data-x="220" data-y="450" data-scale="0.48" class="step"><h2>DCE</h2></div><div id="conditional-compilation" data-x="-220" data-y="746" data-scale="0.48" class="step"><h2>Conditional Compilation</h2></div><div id="flatten" data-x="220" data-y="746" data-scale="0.48" class="step"><h2>Flatten</h2><h2>ES5</h2><h2>-D analyzer</h2></div></div><div id="exotic" data-x="5000" class="step"><h2>Exotic Types</h2><div id="enums" data-x="-220" data-y="450" data-scale="0.48" class="step"><h2>Enums</h2></div><div id="pattern-matching" data-x="220" data-y="450" data-scale="0.48" class="step"><h2>Pattern Matching</h2></div><div id="abstracts" data-x="-220" data-y="746" data-scale="0.48" class="step"><h2>Abstracts</h2></div><div id="externs" data-x="220" data-y="746" data-scale="0.48" class="step"><h2>Externs</h2></div></div><div id="understand" data-x="6000" class="step"><h2>The compiler understands your code</h2><!-- macros--><div id="macro" data-x="-220" data-y="450" data-scale="0.48" class="step"><h2>Macro</h2></div></div><div id="evolution" data-x="7000" class="step"><h2>Evolution at a different pace</h2></div><div id="end" data-x="8000" class="step"><h2>The End</h2><!-- concepts specific to JS and generic--></div></div></body></html>
+</pre><br><pre data-jmpress="fade after .sh_haxe" class="sh_haxe">console.log(instance.name.length);</pre></div><div id="dce" data-x="220" data-y="450" data-scale="0.48" class="step"><h2>DCE</h2><pre data-jmpress="fade after step">-dce std</pre><br><pre data-jmpress="fade after li:first-child">-dce no</pre><br><pre data-jmpress="fade after li:nth-child(2)">-dce full</pre><br></div><div id="conditional-compilation" data-x="-220" data-y="746" data-scale="0.48" class="step"><h2>Conditional Compilation</h2><pre data-jmpress="fade after step">#if cpp
+  nativeCall();
+#elseif js
+  untyped __js__("window.someApiCall")(arg);
+#else
+  // do nothing
+#end</pre></div><div id="flatten" data-x="220" data-y="746" data-scale="0.48" class="step"><h2>Misc Optimizations</h2><pre>-D js-flatten</pre><pre>-D analyzer</pre><!-- better support for nodejs--><!-- super fast compiling time--></div></div><div id="enums" data-x="5000" class="step"><h2>Enums</h2><pre data-jmpress="fade after step">enum Color {
+  Black;
+  White;
+}
+</pre><pre data-jmpress="fade after pre">enum Color {
+  Black;
+  White;
+  RGB(r : Int, g : Int, b : Int);
+}</pre><div id="enums2" data-x="-220" data-y="450" data-scale="0.48" class="step"><h2>Enums #2</h2><pre data-jmpress="fade after step">var color = RGB(100, 0, 0),
+  description = switch color {
+    case Black, RGB(0,0,0): 'pitch black';
+    case RGB(r, _, _) if(r > 120): 'plenty of red';
+    case _: 'anything else';
+  };
+
+trace(description);
+</pre><!-- everything is an expression--></div><div id="pattern-matching0" data-x="220" data-y="450" data-scale="0.48" class="step"><h2>Pattern Matching</h2><pre>enum Tree<T> {
+  Leaf(v:T);
+  Node(l:Tree<T>, r:Tree<T>);
+}</pre></div><div id="pattern-matching" data-x="-220" data-y="746" data-scale="0.48" class="step"><h3>Pattern Matching - Variable Capture</h3><pre>var myTree = Node(
+      Leaf("foo"),
+      Node(
+        Leaf("bar"),
+        Leaf("foobar")
+      )
+    );
+
+return switch myTree {
+  case Leaf(s): s;
+  case Node(Leaf(s), _): s;
+  case _: "none";
+};</pre></div><div id="pattern-matching2" data-x="220" data-y="746" data-scale="0.48" class="step"><h3>Pattern Matching - Structure Matching</h3><pre>var myStructure = {
+  name: "haxe",
+  rating: "awesome"
+};
+
+return = switch myStructure {
+  case { name: "haxe", rating: "poor" }:
+    throw false;
+  case { rating: "awesome", name: n }:
+    n;
+  case _:
+    "no awesome language found";
+};</pre></div><div id="pattern-matching3" data-x="-220" data-y="1042" data-scale="0.48" class="step"><h3>Pattern Matching - Array Matching</h3><pre>var myArray = [1, 6];
+
+return switch myArray {
+  case [2, _]:    "0";
+  case [_, 6]:    "1";
+  case []:        "2";
+  case [_, _, _]: "3";
+  case _:         "4";
+};</pre></div><div id="pattern-matching4" data-x="220" data-y="1042" data-scale="0.48" class="step"><h3>Pattern Matching - Match on Multiple Values and Guards</h3><pre>var num = 3,
+    flag = false,
+    text = "foo";
+
+return switch [num, flag, text] {
+  case [num, true, _] if(num >= 0): "non-negative";
+  case [_, _, "foo"],
+       [_, _, "bar"]: "foo or bar";
+  case [_, _, _]: "everything else";
+};</pre></div></div><div id="abstracts" data-x="6000" class="step"><h2>Abstracts</h2><pre>using StringTools;
+
+abstract RGB(Int) from Int to Int {
+  inline public function new(rgb : Int)
+    this = rgb;
+
+  public var red(get, never)   : Int;
+  public var green(get, never) : Int;
+  public var blue(get, never)  : Int;
+
+  inline function get_red()
+    return (this >> 16) & 0xFF;
+  inline function get_green()
+    return (this >> 8) & 0xFF;
+  inline function get_blue()
+    return this & 0xFF;
+
+  @:from
+  static inline public function fromString(s : String)
+    // some additional pre-processing
+    // might be needed here
+    return new RGB(Std.parseInt(s));
+  @:to
+  inline public function toString()
+    return '#${red.hex()}${green.hex()}${blue.hex()}';
+}</pre><div id="abstracts2" data-x="-220" data-y="450" data-scale="0.48" class="step"><h2>Abstracts #2</h2><pre>var rgb : RGB = "0xBADA55";
+
+// or
+// var rgb : RGB = 0xBADA55;
+
+trace(rgb.green);
+trace('Nice color ${rgb}!');</pre></div><div id="abstracts3" data-x="220" data-y="450" data-scale="0.48" class="step"><h2>Abstracts #3</h2><pre>var rgb;
+var rgb1 = Std.parseInt("0x001133");
+rgb = rgb1;
+console.log(rgb >> 8 & 255);
+console.log("Nice color " +
+  ("#" + StringTools.hex(rgb >> 16 & 255) +
+  StringTools.hex(rgb >> 8 & 255) +
+  StringTools.hex(rgb & 255)) +
+  "!");</pre></div></div><div id="externs" data-x="8000" class="step"><h2>Externs</h2></div><div id="understand" data-x="9000" class="step"><h2>The compiler understands your code</h2><!-- macros--><div id="macro" data-x="-220" data-y="450" data-scale="0.48" class="step"><h2>Macro</h2></div></div><div id="evolution" data-x="10000" class="step"><h2>Evolution at a different pace</h2></div><div id="end" data-x="11000" class="step"><h2>The End</h2><!-- concepts specific to JS and generic--></div></div></body></html>
