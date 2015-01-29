@@ -1,4 +1,24 @@
 h2 Externs
+
+pre.sh_haxe(data-jmpress="fade after slide").
+  package js.node;
+
+  import haxe.DynamicAccess;
+
+  @:jsRequire("querystring")
+  extern class Querystring {
+
+    static function stringify(obj:{}, ?sep:String, ?eq:String):String;
+
+    @:overload(function(str:String, ?options:{maxKeys:Int}):DynamicAccess<String> {})
+    @:overload(function(str:String, sep:String, ?options:{maxKeys:Int}):DynamicAccess<String> {})
+    static function parse(str:String, ?sep:String, ?eq:String):DynamicAccess<String>;
+
+    static dynamic function escape(obj:Dynamic):String;
+
+    static dynamic function unescape(str:String):Dynamic;
+  }
+
 // effort to add the nodejs lib into std (in next version)
 // method overloads
 // jsRequire
