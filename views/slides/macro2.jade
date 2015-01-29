@@ -1,4 +1,17 @@
 h2 Macro #2
 
-figure(data-jmpress="fade after step")
-  img(data-src="images/memes/amacroforthat.jpg")
+pre.sh_haxe(data-jmpress="fade after step").
+  class Time {
+    macro public static function stamp() {
+      var t = Date.now().toString();
+      return macro $v{t};
+    }
+  }
+
+br
+
+pre.sh_haxe(data-jmpress="fade after pre:nth-child(1)").
+  trace(Time.stamp());
+
+pre.sh_javascript(data-jmpress="fade after pre:nth-child(2)").
+  console.log("2015-01-28 16:03:31");
