@@ -268,6 +268,13 @@ pre {
   font-family: menlo, monospace;
   line-height: 1.6em;
 }
+var {
+  padding: 0.2em 0.4em;
+  font-family: menlo, monospace;
+  font-size: 0.75em;
+  background-color: #eee;
+  display: inline-block;
+}
 .small {
   font-size: 0.7em;
   color: #999;
