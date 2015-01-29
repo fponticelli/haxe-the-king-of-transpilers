@@ -1,8 +1,6 @@
 h2 Abstracts
 
-pre.sh_haxe(data-jmpress="fade after step").
-  using StringTools;
-
+pre.scale60.sh_haxe(data-jmpress="fade after step").
   abstract RGB(Int) from Int to Int {
     inline public function new(rgb : Int)
       this = rgb;
@@ -20,8 +18,6 @@ pre.sh_haxe(data-jmpress="fade after step").
 
     @:from
     static inline public function fromString(s : String)
-      // some additional pre-processing
-      // might be needed here
       return new RGB(Std.parseInt(s));
     @:to
     inline public function toString()

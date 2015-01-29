@@ -1,15 +1,17 @@
 h2 Macro #3
 
-pre.sh_haxe(data-jmpress="fade-out after step").
+pre.sh_haxe(data-jmpress="fade after step").
   class RenderFly implements ISystem {
-    // ...
+  // ...
     public function update(position : Position, f : Fly) {
       // ...
     }
 
-pre.sh_haxe(data-jmpress="fade-out after pre").
-    public var componentRequirements(default, null) : Array<Class<Dynamic>> = [Position, Fly];
-    // ...
+pre.sh_haxe(data-jmpress="fade after pre:nth-child(1)").
+  //..
+    public var componentRequirements(default, null)
+      : Array&lt;&lt;ClassDynamic&gt;&gt;
+      = [Position, Fly];
   }
 
 // remove `boiler plate` code
