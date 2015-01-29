@@ -387,6 +387,14 @@ figure.fullpage img {
   width: 45%;
   position: absolute;
 }
+.split-big .left pre,
+.split-big .right pre {
+  max-width: 100%;
+}
+.split-big .left pre:before,
+.split-big .right pre:before {
+  content: "";
+}
 .split-big .right {
   left: 50%;
 }

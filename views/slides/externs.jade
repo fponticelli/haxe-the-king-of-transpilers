@@ -10,9 +10,12 @@ pre.sh_haxe.size80(data-jmpress="fade after slide").
 
     static function stringify(obj:{}, ?sep:String, ?eq:String):String;
 
-    @:overload(function(str:String, ?options:{maxKeys:Int}):DynamicAccess<String> {})
-    @:overload(function(str:String, sep:String, ?options:{maxKeys:Int}):DynamicAccess<String> {})
-    static function parse(str:String, ?sep:String, ?eq:String):DynamicAccess<String>;
+    @:overload(function(str:String, ?options:{maxKeys:Int})
+      :DynamicAccess&lt;String&gt; {})
+    @:overload(function(str:String, sep:String, ?options:{maxKeys:Int})
+      :DynamicAccess&lt;String&gt; {})
+    static function parse(str:String, ?sep:String, ?eq:String)
+    :DynamicAccess&lt;String&gt;;
 
     static dynamic function escape(obj:Dynamic):String;
 
