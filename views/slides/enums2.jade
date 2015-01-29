@@ -2,11 +2,11 @@ h2 Enums #2
 
 pre.sh_haxe(data-jmpress="fade after step").
   var color = RGB(100, 0, 0),
-    description = switch color {
-      case Black, RGB(0,0,0): 'pitch black';
-      case RGB(r, _, _) if(r > 120): 'plenty of red';
-      case _: 'anything else';
-    };
+      description = switch color {
+        case Black, RGB(0,0,0): 'pitch black';
+        case RGB(r, _, _) if(r > 120): 'plenty of red';
+        case _: 'anything else';
+      };
 
   trace(description);
 

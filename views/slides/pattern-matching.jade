@@ -11,6 +11,6 @@ pre.sh_haxe(data-jmpress="fade after step").
 
   return switch myTree {
     case Leaf(s): s;
-    case Node(Leaf(s), _): s;
+    case Node(Leaf(s), _): s.toUpperCase();
     case _: "none";
   };
